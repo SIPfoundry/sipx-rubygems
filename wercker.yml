@@ -1,0 +1,18 @@
+box: joegen/sipx-externals-builder:latest
+no-response-timeout: 10
+command-timeout: 120
+build:
+  steps:
+    - script: 
+        name: Create RPMS
+        code: |
+          yum update -y
+          make
+deploy:
+  steps:
+    - script: 
+        name: Deploying RPMS
+        code: |
+          echo ${SCP_PARAMS}
+          scp -r ${SCP_PARAMS}
+
